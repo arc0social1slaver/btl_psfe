@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+</head>
+
+<body ng-app="idexed" ng-controller="myC" ng-init="olym=false">
+
+    <form name="form1" ng-submit="getAbc(this)" ng-hide="olym">
+        <input type="text" ng-model="abc">
+        <input type="submit" value="Click">
+        <p ng-hide="form1.abc.$touched && processing(this)">hey yo</p>
+    </form>
+    <div ng-show="olym" ng-click="olym=false">
+        <p ng-repeat="item in abcs track by $index">abc : {{item.abc}}; xyz: {{item.xyz}}</p>
+    </div>
+    <!-- <div ng-app="idexed">
+        <input ng-model="userName" type="text"/>
+        <p>Hello {{userName}}</p>
+    </div> -->
+    <script>
+        var app = angular.module("idexed", []);
+        app.controller('myC', ['$scope', function ($scope) {
+            $scope.abcs = [{
+                abc: "",
+                xyz: 0
+            }];
+            $scope.getAbc = function ($this) {
+                $scope.olym = true;
+                // $scope.abced = $scope.abcs.abc;
+                $scope.abced = $this.abc;
+                $scope.abcs.push({ abc: $this.abc, xyz: 12 });
+                // $scope.abcs = {
+                //     abc: ""
+                // };
+                console.log($scope.abcs[0]['xyz']);
+            };
+            $scope.processing = function($this){
+                if($this.abc == "")
+                {
+                    return true;
+                }
+            }
+        }]);
+    </script>
+</body>
+
+</html>

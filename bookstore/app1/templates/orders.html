@@ -1,0 +1,118 @@
+{% extends "header.html" %}
+{% load static %}
+{% comment %} <!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Orders</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet" href="../css/styles.min.css">
+</head>
+
+<body>
+    <header class="header">
+        <div class="header-1">
+            <div class="flex">
+                <div class="share">
+                    <a href="#" class="fab fa-facebook-f"></a>
+                    <a href="#" class="fab fa-twitter"></a>
+                    <a href="#" class="fab fa-instagram"></a>
+                    <a href="#" class="fab fa-linkedin"></a>
+                </div>
+                <p>New <a href="login.html">Login</a> | <a href="register.html">Register</a></p>
+            </div>
+        </div>
+        <div class="header-2">
+            <div class="flex">
+                <a href="home.html" class="logo">Bookly</a>
+                <nav class="navbar">
+                    <a href="home.html">home</a>
+                    <a href="about.html">about</a>
+                    <a href="shop.html">shop</a>
+                    <a href="contact.html">contact</a>
+                    <a href="orders.html">orders</a>
+                </nav>
+                <div class="icons">
+                    <div id="menu-btn" class="fas fa-bars"></div>
+                    <a href="search_page.html" class="fas fa-search"></a>
+                    <div id="user-btn" class="fas fa-user"></div>
+                    <a href="cart.html"><i class="fas fa-shopping-cart"></i> <span>(00)</span></a>
+                </div>
+                <div class="user-box">
+                    <p>Username: <span>Sthing here</span></p>
+                    <p>Email: <span>Sthing here</span></p>
+                    <a href="logout.html" class="delete-btn">Logout</a>
+                </div>
+            </div>
+        </div>
+    </header> {% endcomment %}
+    {% block content %}
+    <div class="heading">
+        <h3>Orders</h3>
+        <p><a href="{% url 'home' %}">Home</a> / orders</p>
+    </div>
+    <section class="placed-orders">
+        <h1 class="title">Placed orders</h1>
+        <div class="box-container">
+        
+        {% if myOrders.count %}
+        {% for item in myOrders  %}
+        <div class="box">
+            <p>Name: <span>{{item.name}}</span></p>
+            <p>Number: <span>{{item.number}}</span></p>
+            <p>Email: <span>{{item.email}}</span></p>
+            <p>Address: <span>{{item.address}}</span></p>
+            <p>Payment method: <span>{{item.method}}</span></p>
+            <p>Your orders: <span>{{item.total_products}}</span></p>
+            <p>Total price: <span>{{item.total_price}}</span></p>
+            <p>Payment status: <span {% if item.payment_status == 'pending' %}style="color:red;"{% endif %}>{{item.payment_status}}</span></p>
+        </div>
+        {% endfor %}
+        {% else %}
+        <p class="empty">There is nothing here</p>
+        {% endif %}                
+        </div>
+    </section>
+    {% endblock content %}
+    {% comment %} <section class="footer">
+        <div class="box-container">
+            <div class="box">
+                <h3>quick links</h3>
+                <a href="home.html">home</a>
+                <a href="about.html">about</a>
+                <a href="shop.html">shop</a>
+                <a href="contact.html">contact</a>
+                <a href="orders.html">orders</a>
+            </div>
+            <div class="box">
+                <h3>extra links</h3>
+                <a href="login.html">login</a>
+                <a href="register.html">register</a>
+                <a href="shop.html">shop</a>
+                <a href="cart.html">cart</a>
+                <a href="orders.html">orders</a>
+            </div>
+            <div class="box">
+                <h3>contact info</h3>
+                <p><i class="fas fa-phone"></i>+123-456-789</p>
+                <p><i class="fas fa-phone"></i>+111-222-333</p>
+                <p><i class="fas fa-envelope"></i>Sthing here</p>
+                <p><i class="fas fa-map-marker-alt"></i>Swhere</p>
+            </div>
+            <div class="box">
+                <h3>follow us</h3>
+                <a href="#"><i class="fab fa-facebook-f"></i>facebook</a>
+                <a href="#"><i class="fab fa-twitter"></i>twitter</a>
+                <a href="#"><i class="fab fa-instagram"></i>instagram</a>
+                <a href="#"><i class="fab fa-linkedin"></i>linkedin</a>
+            </div>
+        </div>
+        <p class="credit"> &copy; copyright @ <span>Dev with date? | all rights reserved!</span>
+        </p>
+    </section>
+    <script src="../js/script.js"></script>
+</body>
+
+</html> {% endcomment %}

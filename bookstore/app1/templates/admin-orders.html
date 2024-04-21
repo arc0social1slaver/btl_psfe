@@ -1,0 +1,54 @@
+{% extends "admin-header.html" %}
+{% load static %}
+{% comment %} <!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>orders</title>
+    <!-- font-awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet" href="../css/admin_style.min.css">
+</head>
+
+<body> {% endcomment %}
+    {% block content %}
+
+    <section class="orders">
+        <h1 class="title">Placed orders</h1>
+        <div class="box-container">
+            {% if many_orders.count == 0  %}
+            <p class="empty">No orders here!</p>
+            {% else %}
+            {% for item in many_orders %}
+            <div class="box">
+                <p>User id: <span>{{item.user_id}}</span></p>
+                <p>Placed on:  <span>{{item.placed_on}}</span></p>
+                <p>Name: <span>{{item.name}}</span></p>
+                <p>Number: <span>{{item.number}}</span></p>
+                <p>Address: <span>{{item.address}}</span></p>
+                <p>Total products: <span>{{item.total_products}}</span></p>
+                <p>Total price: <span>{{item.total_price}}</span></p>
+                <p>Payment method: <span>{{item.payment_status}}</span></p>
+                <form action="" method="post">
+                    {% csrf_token %}
+                    <input type="hidden" name="up_id" value="{{item.id}}">
+                    <select name="up_pay" id="up_pay">
+                        <option value="" selected disabled>Recent status:{{item.payment_status}}</option>
+                        <option value="pending">Pending</option>
+                        <option value="completed">Completed</option>
+                    </select>
+                    <input type="submit" value="Update order" class="option-btn">
+                    <a href="{% url 'deleteOrder' ordId=item.id %}" onclick="return confirm('delete this order?');" class="delete-btn">delete</a>
+                </form>
+            </div>
+            {% endfor %}
+            {% endif %}
+        </div>
+    </section>
+    {% endblock content %}
+    {% comment %} <script src="../js/admin_script.js"></script>
+</body>
+
+</html> {% endcomment %}

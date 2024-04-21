@@ -1,0 +1,47 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin panel</title>
+    <!-- font-awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet" href="{% static '/css/admin_style.min.css' %}">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+</head>
+<body>
+    {% if message %}
+    <div class="message">
+        <span>{{message}}</span>
+        <i class="fas fa-times" onclick="this.parentElement.remove();"></i>
+    </div>
+    {% endif %}
+<header class="header">
+    <div class="flex">
+        <a href="{% url 'adminPanel' %}" class="logo">
+            Admin <span>Panel</span>
+        </a>
+        <nav class="navbar">
+            <a href="{% url 'adminPanel' %}">Home</a>
+            <a href="{% url 'adminProduct' %}">Products</a>
+            <a href="{% url 'adminOrders' %}">Orders</a>
+            <a href="{% url 'adminUsers' %}">Users</a>
+            <a href="{% url 'adminContacts' %}">Messages</a>
+        </nav>
+        <div class="icons">
+            <div id="menu-btn" class="fas fa-bars"></div>
+            <div id="user-btn"  class="fas fa-users"></div>
+        </div>
+        <div class="account-box">
+            <p>Username: <span>{{current_user.0}}</span></p>
+            <p>Email: <span>{{current_user.1}}</span></p>
+            <a href="{% url 'logout' %}" class="delete-btn">Logout</a>
+        </div>
+    </div>
+</header>
+{% block content %}
+{% endblock content %}
+<script src="{% static '/js/admin_script.js' %}"></script>
+</body>
+</html>

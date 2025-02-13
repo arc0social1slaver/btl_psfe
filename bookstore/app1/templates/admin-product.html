@@ -1,0 +1,73 @@
+{% extends "admin-header.html" %}
+{% load static %}
+{% comment %} <!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>product</title>
+    <!-- font-awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet" href="../css/admin_style.min.css">
+</head>
+
+<body> {% endcomment %}
+    <!-- product crud section start -->
+    {% block content %}
+    <section class="add-products">
+        <h1 class="title">
+            shop Products
+        </h1>
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <h3>add products</h3>
+            <input required type="text" name="name" id="name" class="box" placeholder="Enter pro name">
+            <input required type="number" name="price" id="price" class="box" placeholder="Enter pro price">
+            {% comment %} <input type="file" name="image" id="image" accept="image/jpg, image/jpeg, image/png" class="box" required> {% endcomment %}
+            <input type="submit" value="add product" class="btn">
+        </form>
+
+    </section>
+    <!-- product crud section end -->
+    <!-- show product -->
+    <section class="show-products">
+        <div class="box-container">
+            {% if many_products.count == 0 %}
+            <p class="empty">No product added yet!</p>
+            {% else %}
+            {% for item in many_products %}
+            <div class="box">
+                <div class="name">{{item.name}}</div>
+                <div class="price">{{item.price}}</div>
+                <a href="{% url 'updatePro' proId=item.id action='update'  %}" class="option-btn">update</a>
+                <a href="{% url 'deletePro' prodId=item.id action='delete' %}" class="delete-btn" onclick="return confirm('Delete this product?')" >delete</a>
+            </div>
+            {% endfor %}
+            {% endif %}
+            <!-- or -->
+
+        </div>
+    </section>
+
+    <section class="edit-product-form">
+        {% if proUpd != NaN %}
+        <form action="" method="post">
+            {% csrf_token %}
+            <input type="text" name="proUpdName" id="proUpdName" value="{{proUpd.name}}" class="box" required placeholder="Enter pro name">
+            <input type="number" name="proUpdPrice" id="proUpdPrice" value="{{proUpd.price}}" class="box" min="0" required placeholder="Enter pro price">
+            <input type="submit" value="update pro" class="btn">
+            {% comment %} <input type="reset" value="cancel" id="close-update" class="option-btn"> {% endcomment %}
+            <a href="{% url 'adminProduct' %}" class="option-btn">Cancel</a>
+        </form>
+        {% else %}
+        <script>
+            document.querySelector('.edit-product-form').style.display = 'none';
+        </script>
+        {% endif %}
+    </section>
+    {% endblock content %}
+    {% comment %} <script src="../js/admin_script.js"></script>
+</body>
+
+</html> {% endcomment %}

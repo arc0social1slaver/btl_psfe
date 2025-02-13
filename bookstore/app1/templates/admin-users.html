@@ -1,0 +1,36 @@
+{% extends "admin-header.html" %}
+{% load static %}
+{% comment %} <!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>users</title>
+    <!-- font-awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet" href="../css/admin_style.min.css">
+</head>
+
+<body> {% endcomment %}
+    {% block content %}
+    <section class="users">
+        <h1 class="title">User account</h1>
+        <div class="box-container">
+            {% for user in many_users %}
+            <div class="box">
+                <p>Username : <span>{{user.name}}</span></p>
+                <p>Email : <span>{{user.email}}</span></p>
+                <p>
+                    User type : <span style="color:{% if user.user_type == 'admin'  %}var(--orange){% endif %}">{{user.user_type}}</span>
+                </p>
+                <a href="{% url 'deleteUser' uId=user.id %}" onclick="return confirm('delete this user?');" class="delete-btn">delete</a>
+            </div>
+            {% endfor %}
+        </div>
+    </section>
+    {% endblock content %}
+    {% comment %} <script src="../js/admin_script.js"></script>
+</body>
+
+</html> {% endcomment %}

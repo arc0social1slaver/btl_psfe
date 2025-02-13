@@ -1,0 +1,145 @@
+{% extends "header.html" %}
+{% load static %}
+{% comment %} <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet" href="../css/styles.min.css">
+</head>
+<body>
+    <header class="header">
+        <div class="header-1">
+            <div class="flex">
+                <div class="share">
+                    <a href="#" class="fab fa-facebook-f"></a>
+                    <a href="#" class="fab fa-twitter"></a>
+                    <a href="#" class="fab fa-instagram"></a>
+                    <a href="#" class="fab fa-linkedin"></a>
+                </div>
+                <p>New <a href="login.html">Login</a> | <a href="register.html">Register</a></p>
+            </div>
+        </div>
+        <div class="header-2">
+            <div class="flex">
+                <a href="home.html" class="logo">Bookly</a>
+                <nav class="navbar">
+                    <a href="home.html">home</a>
+                    <a href="about.html">about</a>
+                    <a href="shop.html">shop</a>
+                    <a href="contact.html">contact</a>
+                    <a href="orders.html">orders</a>
+                </nav>
+                <div class="icons">
+                    <div id="menu-btn" class="fas fa-bars"></div>
+                    <a href="search_page.html" class="fas fa-search"></a>
+                    <div id="user-btn" class="fas fa-user"></div>
+                    <a href="cart.html"><i class="fas fa-shopping-cart"></i> <span>(00)</span></a>
+                </div>
+                <div class="user-box">
+                    <p>Username: <span>Sthing here</span></p>
+                    <p>Email: <span>Sthing here</span></p>
+                    <a href="logout.html" class="delete-btn">Logout</a>
+                </div>
+            </div>
+        </div>
+    </header> {% endcomment %}
+    {% block content %}
+
+
+    <div class="heading">
+        <h3>checkout</h3>
+        <p><a href="{% url 'home' %}">Home</a> / checkout</p>
+    </div>
+
+    <section class="display-order">
+        {% if myCarts.count %}
+        {% for item in myCarts  %}
+        <p>{{item.name}}: <span>{{item.subTotal}}</span></p>
+        {% endfor %}
+        <div class="grand-total">Grand total: <span>{{grandTotal}}</span></div>
+        {% else %}
+        <p class="empty">Your cart is empty</p>
+        {% endif %}
+    </section>
+    <section class="checkout">
+        <form action="" method="post">
+            {% csrf_token %}
+            <h3>Place your orders</h3>
+            <div class="flex">
+                <div class="inputBox">
+                    <span>Your name:</span>
+                    <input type="text" name="name" required placeholder="enter your name">
+                </div>
+                <div class="inputBox">
+                    <span>Your number:</span>
+                    <input type="number" name="number" required placeholder="enter your number">
+                </div>
+                <div class="inputBox">
+                    <span>Your email:</span>
+                    <input type="email" name="email" required placeholder="enter your email">
+                </div>
+                <div class="inputBox">
+                    <span>Payment method:</span>
+                    <select name="pay_method">
+                        <option value="cash on delivery">cash on delivery</option>
+                        <option value="credit card">credit card</option>
+                        <option value="paypal">paypal</option>
+                        <option value="paytm">paytm</option>
+                    </select>
+                </div>
+                <div class="inputBox">
+                    <span>Your address:</span>
+                    <input type="text" name="address" required placeholder="enter your address">
+                </div>
+                <div class="inputBox">
+                    <span>Your pin code:</span>
+                    <input type="number" min="0" name="pin_code" required placeholder="enter your pin code">
+                </div>
+            </div>
+            <input type="submit" value="order now" class="btn">
+        </form>
+    </section>
+    {% endblock content %}
+    {% comment %} <section class="footer">
+        <div class="box-container">
+            <div class="box">
+                <h3>quick links</h3>
+                <a href="home.html">home</a>
+                <a href="about.html">about</a>
+                <a href="shop.html">shop</a>
+                <a href="contact.html">contact</a>
+                <a href="orders.html">orders</a>
+            </div>
+            <div class="box">
+                <h3>extra links</h3>
+                <a href="login.html">login</a>
+                <a href="register.html">register</a>
+                <a href="shop.html">shop</a>
+                <a href="cart.html">cart</a>
+                <a href="orders.html">orders</a>
+            </div>
+            <div class="box">
+                <h3>contact info</h3>
+                <p><i class="fas fa-phone"></i>+123-456-789</p>
+                <p><i class="fas fa-phone"></i>+111-222-333</p>
+                <p><i class="fas fa-envelope"></i>Sthing here</p>
+                <p><i class="fas fa-map-marker-alt"></i>Swhere</p>
+            </div>
+            <div class="box">
+                <h3>follow us</h3>
+                <a href="#"><i class="fab fa-facebook-f"></i>facebook</a>
+                <a href="#"><i class="fab fa-twitter"></i>twitter</a>
+                <a href="#"><i class="fab fa-instagram"></i>instagram</a>
+                <a href="#"><i class="fab fa-linkedin"></i>linkedin</a>
+            </div>
+        </div>
+        <p class="credit"> &copy; copyright @ <span>Dev with date? | all rights reserved!</span>
+        </p>
+    </section>
+
+    <script src="../js/script.js"></script>
+</body>
+</html> {% endcomment %}

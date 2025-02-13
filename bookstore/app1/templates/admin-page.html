@@ -1,0 +1,86 @@
+{% extends "admin-header.html" %}
+{% load static %}
+{% comment %} <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin panel</title>
+    <!-- font-awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet" href="../css/admin_style.min.css">
+</head>
+<body> {% endcomment %}
+    <!-- admin dashboard section start -->
+    {% block content %}
+    <section class="dashboard">
+        <h1 class="title">Dashboard</h1>
+        <div class="box-container">
+            <div class="box">
+                <h3>
+                {% if many_orders.count > 0 %}
+                    {{many_orders.0.total_pendings}}
+                {% else %}
+                    0
+                {% endif %}
+                </h3>
+                <p>Total pendings</p>
+            </div>
+            <div class="box">
+                <h3>
+                {% if many_orders.count > 0 %}
+                    {{many_orders.0.total_compls}}
+                {% else %}
+                    0
+                {% endif %}
+                </h3>
+                <p>Completed payments</p>
+            </div>
+            <div class="box">
+                <h3>{{many_orders.count}}</h3>
+                <p>Order placed</p>
+            </div>
+            <div class="box">
+                <h3>{{many_products.count}}</h3>
+                <p>Products added</p>
+            </div>
+            <div class="box">
+                <h3>
+                    {% if many_users.count > 0 %}
+                        {{many_users.0.totalNormalUser  }}
+                    {% else %}
+                        0
+                    {% endif %}
+                    </h3>
+                <p>Normal users</p>
+            </div>
+            <div class="box">
+                <h3>
+                    {% if many_users.count > 0 %}
+                        {{many_users.0.totalNormalAdmin  }}
+                    {% else %}
+                        0
+                    {% endif %}
+                    </h3>
+                <p>Admin users</p>
+            </div>
+            <div class="box">
+                <h3>
+                    {{ many_users.count}}
+                </h3>
+                <p>Total users</p>
+            </div>
+            <div class="box">
+                <h3>
+                    {{ many_messages.count}}
+                </h3>
+                <p>Total messages</p>
+            </div>
+        </div>
+    </section>
+    
+    <!-- admin dashboard section end -->
+    {% endblock content %}
+    {% comment %} <script src="../js/admin_script.js"></script>
+</body>
+</html> {% endcomment %}

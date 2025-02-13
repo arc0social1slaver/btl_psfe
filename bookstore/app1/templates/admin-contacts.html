@@ -1,0 +1,39 @@
+{% extends "admin-header.html" %}
+{% load static %}
+{% comment %} <!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>messages</title>
+    <!-- font-awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet" href="../css/admin_style.min.css">
+</head>
+
+<body> {% endcomment %}
+    {% block content %}
+    <section class="messages">
+        <h1 class="title">messages</h1>
+        <div class="box-container">
+            {% if many_messages.count == 0 %}
+            <p class="empty">Nothing here</p>
+            {% else %}
+            {% for item in many_messages  %}
+            <div class="box">
+                <p>Name: <span>{{item.name}}</span></p>
+                <p>Number: <span>{{item.number}}</span></p>
+                <p>Email: <span>{{item.email}}</span></p>
+                <p>Message: <span>{{item.message}}</span></p>
+                <a href="{% url "deleteContact" messId=item.id %}" onclick="return confirm('delete this message?');" class="delete-btn">delete</a>
+            </div>
+            {% endfor %}
+            {% endif %}
+        </div>
+    </section>
+    {% endblock content %}
+    {% comment %} <script src="../js/admin_script.js"></script>
+</body>
+
+</html> {% endcomment %}
